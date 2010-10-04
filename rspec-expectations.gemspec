@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
-$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
 require "rspec/expectations/version"
+
+require "rspec/core/version"
+require "rspec/mocks/version"
 
 Gem::Specification.new do |s|
   s.name        = "rspec-expectations"
@@ -22,10 +24,14 @@ Gem::Specification.new do |s|
   s.rdoc_options     = ["--charset=UTF-8"]
   s.require_path     = "lib"
 
-  s.add_runtime_dependency     'diff-lcs',    '>= 1.1.2'
-  s.add_development_dependency 'cucumber',    ">= 0.6.2"
-  s.add_development_dependency 'aruba',       ">= 0.1.1"
-  s.add_development_dependency 'rspec-core',  ">= #{RSpec::Expectations::Version::STRING}"
-  s.add_development_dependency 'rspec-mocks', ">= #{RSpec::Expectations::Version::STRING}"
+  s.add_runtime_dependency     'diff-lcs',           '>= 1.1.2'
+
+  s.add_development_dependency "rspec-core",         ">= #{RSpec::Core::Version::STRING}"
+  s.add_development_dependency "rspec-mocks",        ">= #{RSpec::Mocks::Version::STRING}"
+  s.add_development_dependency "rake",               ">= 0.8.7"
+  s.add_development_dependency "cucumber",           ">= 0.9.1"
+  s.add_development_dependency "aruba",              ">= 0.2.3"
+  s.add_development_dependency "watchr",             ">= 0.7"
+  s.add_development_dependency "autotest",           ">= 4.4.1"
 end
 

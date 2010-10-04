@@ -1,19 +1,21 @@
-source "http://rubygems.org"
+source :rubygems
 
-gem "rake"
-gem "cucumber"
-gem "aruba", ">= 0.2.0"
-gem "autotest"
-gem "diff-lcs"
-gem "rspec-expectations", :path => "."
-gem "rspec-core", :path => "../rspec-core"
-gem "rspec-mocks", :path => "../rspec-mocks"
-gem "watchr"
-gem "rcov"
+gems = %w[rspec rspec-core rspec-expectations rspec-mocks]
+gems.each do |g|
+  $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + "/../#{g}/lib")
+end
+gemspec
+gems.each do |g|
+  @dependencies.reject!{|dep| dep.name == g}
+  gem g, :path => "../#{g}"
+end
 
-case RUBY_VERSION
-when '1.9.2'
-  gem 'ruby-debug19'
-when /^1\.8/
-  gem 'ruby-debug'
+unless RUBY_PLATFORM == "java"
+  case RUBY_VERSION
+  when /^1.9.2/
+    gem "ruby-debug19"
+  when /^1.8/
+    gem "ruby-debug"
+    gem "rcov"
+  end
 end
